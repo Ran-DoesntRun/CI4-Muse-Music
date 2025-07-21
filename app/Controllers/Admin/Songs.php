@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\AlbumsModel;
 use App\Models\ArtistsModel;
+use App\Models\ReviewModel;
 use App\Models\SongsModel;
 
 class Songs extends BaseController
@@ -12,22 +13,19 @@ class Songs extends BaseController
     protected $albumsModel;
   protected $artistsModel;
   protected $songsModel;
+  protected $reviewModel;
 
   public function __construct(){
     $this -> albumsModel = new AlbumsModel();
     $this -> artistsModel = new ArtistsModel();
     $this -> songsModel = new SongsModel();
+    $this -> reviewModel = new ReviewModel();
   }
 
     public function index(){
-        $db = \Config\Database::connect();
 
-        $songs = $db->table('songs')
-            ->select('songs.*, albums.title AS album, artists.nama AS singer')
-            ->join('albums', 'albums.id = songs.id_album', 'left')
-            ->join('artists', 'artists.id = songs.id_artist')
-            ->get()
-            ->getResult();
+        $songs = $this -> songsModel -> getAllSongWthReview();
+            
 
         $data = [
             'title' => 'MUSE MUSIC',
@@ -39,21 +37,12 @@ class Songs extends BaseController
     }
 
     public function create(){
-        $db = \Config\Database::connect();
-        $albumsRaw = $db->table('albums')
-            ->select('albums.id, albums.title, albums.id_artists')
-            ->get()
-            ->getResult();
-
-        $albums = [];
-        foreach ($albumsRaw as $album) {
-            $albums[$album->id_artists][] = $album;
-        }
+        
 
         $data = [
             'title' => 'INPUT SONG',
             'artists' => $this->artistsModel->findAll(), // All artists
-            'albums' => $albums // Grouped albums
+            'albums' => $this->albumsModel->getAlbums() // Grouped albums
         ];
 
 
@@ -62,32 +51,17 @@ class Songs extends BaseController
 
     public function edit($id)
 {
-    $db = \Config\Database::connect();
-
-    // Get the song to edit
-    $song = $db->table('songs')
+    $song = $this -> songsModel
         ->where('id', $id)
         ->get()
         ->getRow();
 
-    if (!$song) {
-        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Song not found');
-    }
-
-    // Get all artists
-    $artists = $db->table('artists')->get()->getResult();
-
-    // Get albums grouped by artist
-    $albumsQuery = $db->table('albums')->get()->getResult();
-    $albums = [];
-    foreach ($albumsQuery as $album) {
-        $albums[$album->id_artists][] = $album;
-    }
+    $artists = $this -> artistsModel ->get()->getResult();
 
     return view('admin/songs/songs_edit', [
         'song'    => $song,
         'artists' => $artists,
-        'albums'  => $albums,
+        'albums'  => $this -> albumsModel ->getAlbums(),
         'title'   => 'EDIT SONG'
     ]);
 }
@@ -142,6 +116,24 @@ class Songs extends BaseController
       unlink('assets/images/'.$song->img);
 
       $this->songsModel->delete($id);
+
+      return redirect()->to('/admin/songs');
+    }
+
+    public function review($id) {
+        $song = $this->songsModel -> getArtistSong($id);
+        $review = $this->reviewModel->getSongReview($id);
+        return view('/admin/songs/review', [
+            'id'        => $song->id,
+            'title'     => $song->title,
+            'singer'    => $song->artist,
+            'comments'  => $review
+        ]);
+    }
+
+    public function delrev($id){
+
+      $this->reviewModel->delete($id);
 
       return redirect()->to('/admin/songs');
     }

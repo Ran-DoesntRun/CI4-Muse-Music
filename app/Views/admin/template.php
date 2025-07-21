@@ -10,29 +10,32 @@
 </head>
 <header>
   <!-- navbar goes here -->
-<nav class="bg-gray-100 max-w-screen-xl mx-auto">
+<nav class=" bg-teal-500 max-w-screen-xl mx-auto rounded-md font-semibold">
   <div class="max-w-screen-xl mx-auto px-4">
     <div class="flex justify-between">
 
       <div class="flex space-x-4">
         <!-- logo -->
         <div>
-          <a href="<?= base_url() ?>admin/songs" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+          <a href="<?= base_url() ?>admin/songs" class="flex items-center py-5 px-2 text-white hover:text-blue-950">
             <img class="h-7 w-7" src='<?= base_url() ?>assets/images/logo.png'>
           </a>
         </div>
 
         <!-- primary nav -->
         <div class="hidden md:flex items-center space-x-1">
-          <a href="<?= base_url() ?>admin/songs" class="py-5 px-3 text-gray-700 hover:text-gray-900">Music</a>
-          <a href="<?= base_url() ?>admin/albums" class="py-5 px-3 text-gray-700 hover:text-gray-900">Album</a>
-          <a href="<?= base_url() ?>admin/artists" class="py-5 px-3 text-gray-700 hover:text-gray-900">Artist</a>
+          <a href="<?= base_url() ?>admin/songs" class="py-5 px-3 text-black hover:text-blue-950">Music</a>
+          <a href="<?= base_url() ?>admin/albums" class="py-5 px-3 text-black hover:text-blue-950">Album</a>
+          <a href="<?= base_url() ?>admin/artists" class="py-5 px-3 text-black hover:text-blue-950">Artist</a>
+          <?php if(session()->get('type') == "administrator") { ?>
+          <a href="<?= base_url() ?>admin/register" class="py-5 px-3 text-black hover:text-blue-950">Add Admin</a>
+          <?php } ?>
         </div>
       </div>
 
       <div class="flex flex-row space-x-4">
         <div class="flex items-center space-x-1">
-        <a href="<?= base_url() ?>login" class="py-5 px-3">Log Out</a>
+        <a href="<?= base_url() ?>admin/logout" class="py-5 px-3">Log Out</a>
       </div>
 
       <!-- mobile button goes here -->
@@ -54,6 +57,9 @@
     <a href="<?= base_url() ?>admin/songs" class="block py-2 px-4 text-sm hover:bg-gray-200">Music</a>
     <a href="<?= base_url() ?>admin/albums" class="block py-2 px-4 text-sm hover:bg-gray-200">Album</a>
     <a href="<?= base_url() ?>admin/artists" class="block py-2 px-4 text-sm hover:bg-gray-200">Artist</a>
+    <?php if(session()->get('type') == "administrator") { ?>
+          <a href="<?= base_url() ?>admin/register" class="block py-2 px-4 text-sm hover:bg-gray-200">Add Admin</a>
+          <?php } ?>
   </div>
 </nav>
 </header>
@@ -73,18 +79,18 @@
 
     </script>
 </body>
-<footer class="bg-white w-full max-w-screen-xl ">
+<footer class="bg-white w-full max-w-screen-xl mx-auto">
     <div class="mx-auto w-full max-w-screen-xl p-4">
       <hr class="my-2 border-gray-200 sm:mx-auto" />
       <div class="sm:flex sm:items-center sm:justify-between">
           <span class="text-sm text-gray-500 sm:text-center ">© 2025 <span class="hover:underline">Evan Febrian</span>.
           </span>
           <div class="flex mt-4 sm:justify-center sm:mt-0">
-              <a href="#" class="text-gray-500 hover:text-gray-900 ">
+              <a href="#" class="text-gray-500 hover:text-blue-950 ">
                   <!-- TO DO : ADD ICON -->
                   <span class="sr-only">Instagram Account</span>
               </a>
-              <a href="#" class="text-gray-500 hover:text-gray-900  ms-5">
+              <a href="#" class="text-gray-500 hover:text-blue-950  ms-5">
                   <!-- TO DO : ADD ICON -->
                   <span class="sr-only">GitHub account</span>
               </a>

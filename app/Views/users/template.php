@@ -11,23 +11,23 @@
 </head>
 <header>
   <!-- navbar goes here -->
-<nav class="bg-gray-100 max-w-screen-xl mx-auto">
+<nav class="bg-teal-500 max-w-screen-xl mx-auto">
   <div class="max-w-screen-xl mx-auto px-4">
     <div class="flex justify-between">
 
       <div class="flex space-x-4">
         <!-- logo -->
         <div>
-          <a href="<?= base_url() ?>song" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+          <a href="<?= base_url() ?>song" class="flex items-center py-5 px-2 text-black hover:text-gray-900">
             <img class="h-7 w-7" src='<?= base_url() ?>assets/images/logo.png'>
           </a>
         </div>
 
         <!-- primary nav -->
         <div class="hidden md:flex items-center space-x-1">
-          <a href="<?= base_url() ?>song" class="py-5 px-3 text-gray-700 hover:text-gray-900">Music</a>
-          <a href="<?= base_url() ?>album" class="py-5 px-3 text-gray-700 hover:text-gray-900">Album</a>
-          <a href="<?= base_url() ?>singer" class="py-5 px-3 text-gray-700 hover:text-gray-900">Artist</a>
+          <a href="<?= base_url() ?>song" class="py-5 px-3 text-black hover:text-gray-900">Music</a>
+          <a href="<?= base_url() ?>album" class="py-5 px-3 text-black hover:text-gray-900">Album</a>
+          <a href="<?= base_url() ?>singer" class="py-5 px-3 text-black hover:text-gray-900">Artist</a>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
         <a href="<?= base_url() ?>logout" class="py-5 px-3">Log Out</a>
            <?php }else{ ?>
         <a href="<?= base_url() ?>login" class="py-5 px-3">Login</a>
-        <a href="<?= base_url() ?>signup" class="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">Signup</a>
+        <a href="<?= base_url() ?>signup" class="py-2 px-3 bg-teal-900 hover:bg-teal-950 text-white hover:text-yellow-800 rounded transition duration-300">Signup</a>
         <?php } ?>
       </div>
 
@@ -79,7 +79,7 @@
 
     </script>
 </body>
-<footer class="bg-white">
+<footer class="bg-teal-300 max-w-screen-xl mx-auto mt-10">
     <div class="mx-auto w-full max-w-screen-xl p-4">
       <hr class="my-2 border-gray-200 sm:mx-auto" />
       <div class="sm:flex sm:items-center sm:justify-between">

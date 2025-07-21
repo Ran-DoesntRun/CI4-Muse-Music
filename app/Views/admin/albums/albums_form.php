@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 <div class="max-w-xl mx-auto mt-8 bg-white shadow rounded-lg p-6">
-    <h2 class="text-2xl font-bold text-center mb-6">💿 Add New Album</h2>
+    <h2 class="text-2xl font-bold text-center mb-6">Add Album</h2>
 
     <form action="<?= base_url(); ?>admin/album/save" method="post" enctype="multipart/form-data" class="space-y-4">
         <?= csrf_field(); ?>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="text-center">
-            <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white px-5 py-2 rounded-lg">Save</button>
+            <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-black px-5 py-2 rounded-lg">Save</button>
         </div>
     </form>
 </div>

@@ -17,21 +17,12 @@ class Albums extends BaseController
     $this -> artistsModel = new ArtistsModel();
   }
   public function index(){
-    $db = \Config\Database::connect();
-    $albums = $db->table('albums')
-    ->select('albums.*, artists.nama AS artist_name')
-    ->join('artists', 'artists.id = albums.id_artists')
-    ->get()
-    ->getResult();
-
-    
         $data = [
             'title' => 'MUSE MUSIC',
             'subject' => 'albums',
-            'albums' => $albums
+            'albums' => $this -> albumsModel->getAlbumAndArtist()
 
         ];
-
         return view('/admin/albums/albums', $data);
     }
 
